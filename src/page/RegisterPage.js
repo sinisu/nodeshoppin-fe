@@ -45,15 +45,15 @@ const RegisterPage = () => {
   };
 
   const handleChange = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     // 값을 읽어서 FormData에 넣어주기
     const {id,value,checked} = event.target;
     console.log(id,checked);
     if(id==='policy'){
-        setFormData({...formData,[id]:checked});
+      setFormData({...formData,[id]: checked});
     } else{
-      setFormData({...formData,[id]:value});
+      setFormData({...formData,[id]: value});
     }
   };
 
@@ -111,11 +111,11 @@ const RegisterPage = () => {
             {passwordError}
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group className='mb-3'>
           <Form.Check
-            type="checkbox"
-            label="이용약관에 동의합니다"
-            id="policy"
+            type='checkbox'
+            label='이용약관에 동의합니다'
+            id='policy'
             onChange={handleChange}
             isInvalid={policyError}
             checked={formData.policy}
@@ -127,6 +127,6 @@ const RegisterPage = () => {
       </Form>
     </Container>
   );
-};
+}
 
 export default RegisterPage;

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { userActions } from "../action/userAction";
 import "../style/register.style.css";
 import { faL } from "@fortawesome/free-solid-svg-icons";
+
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({

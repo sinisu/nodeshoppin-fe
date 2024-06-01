@@ -20,6 +20,8 @@ const registerUser =
       navigate('/login')
     }catch(error){
       dispatch({type:types.REGISTER_USER_FAIL,payload:error.error});
+      console.log(error.error)
+      dispatch(commonUiActions.showToastMessage(`${error.error}`,'success'));
     }
   };
 export const userActions = {

@@ -2,7 +2,7 @@ import * as types from "../constants/user.constants";
 const initialState = {
   loading:false,
   user:null,
-  errpr:"",
+  error:"",
 };
 
 function userReducer(state = initialState, action) {
@@ -16,6 +16,8 @@ function userReducer(state = initialState, action) {
     case types.LOGIN_FAIL:
     case types.REGISTER_USER_FAIL:
       return{...state,loading:false, error:payload};
+    case types.CLEAR_ERRORS:
+      return{...state, error:""};
     default:
       return state;
   }

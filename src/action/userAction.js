@@ -14,6 +14,11 @@ const loginWithEmail = ({email,password}) => async (dispatch) => {
     dispatch({type:types.LOGIN_FAIL,payload:error.error});
   }
 };
+
+const clearErrors = () => ({
+  type:types.CLEAR_ERRORS
+});
+
 const logout = () => async (dispatch) => {};
 
 const loginWithGoogle = (token) => async (dispatch) => {};
@@ -39,4 +44,5 @@ export const userActions = {
   logout,
   loginWithGoogle,
   registerUser,
+  clearErrors,
 };

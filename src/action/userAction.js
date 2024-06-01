@@ -20,8 +20,7 @@ const registerUser =
       navigate('/login')
     }catch(error){
       dispatch({type:types.REGISTER_USER_FAIL,payload:error.error});
-      console.log(error.error)
-      dispatch(commonUiActions.showToastMessage(`${error.error}`,'success'));
+      dispatch(commonUiActions.showToastMessage('이미 가입된 유저입니다!','error'));
     }
   };
 export const userActions = {

@@ -17,7 +17,7 @@ const InitialFormData = {
   description: "",
   category: [],
   status: "active",
-  price: 0,
+  price: "",
 };
 const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const selectedProduct = useSelector((state) => state.product.selectedProduct);
@@ -30,7 +30,10 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const [stockError, setStockError] = useState(false);
   const handleClose = () => {
     //모든걸 초기화시키고;
+    setFormData(InitialFormData);
+    setStock([]);
     // 다이얼로그 닫아주기
+    setShowDialog(false);
   };
 
   const handleSubmit = (event) => {
@@ -48,6 +51,8 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     if (mode === "new") {
       //새 상품 만들기
       dispatch(productActions.createProduct({...formData,stock:totalStock}));
+      setFormData(InitialFormData);
+      setStock([]);
       setShowDialog(false);
     } else {
       // 상품 수정하기
@@ -87,6 +92,8 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   };
 
   const onHandleCategory = (event) => {
+    console.log('a',formData.category);
+    console.log('aho',event.target.value);
     if (formData.category.includes(event.target.value)) {
       const newCategory = formData.category.filter(
         (item) => item !== event.target.value
@@ -100,7 +107,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
         ...formData,
         category: [...formData.category, event.target.value],
       });
-    }
+    };
   };
 
   const uploadImage = (url) => {

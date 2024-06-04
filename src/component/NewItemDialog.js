@@ -7,6 +7,7 @@ import { CATEGORY, STATUS, SIZE } from "../constants/product.constants";
 import "../style/adminProduct.style.css";
 import * as types from "../constants/product.constants";
 import { commonUiActions } from "../action/commonUiAction";
+import { image } from "@cloudinary/url-gen/qualifiers/source";
 
 const InitialFormData = {
   name: "",
@@ -27,8 +28,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const [stock, setStock] = useState([]);
   const dispatch = useDispatch();
   const [stockError, setStockError] = useState(false);
-  console.log("stock",stock);
-  console.log("cate",formData);
   const handleClose = () => {
     //모든걸 초기화시키고;
     // 다이얼로그 닫아주기
@@ -36,11 +35,20 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("title",formData)
     //재고를 입력했는지 확인, 아니면 에러
+    if (stock.length === 0) return setStockError(true);
+
     // 재고를 배열에서 객체로 바꿔주기
     // [['M',2]] 에서 {M:2}로
+    const totalStock = stock.reduce((total,item)=>{
+      return {...total,[item[0]]:parseInt(item[1])}
+    },{})
+
     if (mode === "new") {
       //새 상품 만들기
+      dispatch(productActions.createProduct({...formData,stock:totalStock}));
+      setShowDialog(false);
     } else {
       // 상품 수정하기
     }
@@ -54,6 +62,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const addStock = () => {
     //재고타입 추가시 배열에 새 배열 추가
+    setStockError(false);
     setStock([...stock,[]]);
   };
 
@@ -96,6 +105,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const uploadImage = (url) => {
     //이미지 업로드
+    setFormData({...formData,image:url});
   };
 
   useEffect(() => {

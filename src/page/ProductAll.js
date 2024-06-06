@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ProductCard from "../component/ProductCard";
 import { Row, Col, Container, Alert, Spinner } from "react-bootstrap";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../action/productAction";
 import { commonUiActions } from "../action/commonUiAction";
@@ -18,8 +18,6 @@ const ProductAll = () => {
     const searchWord = query? query.get("name") : null;
     dispatch(productActions.getProductList({name:searchWord}));
   },[query])
-
-  if(error) return <Alert>{error}</Alert>
 
   return (
     <Container>

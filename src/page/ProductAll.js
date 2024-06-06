@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../component/ProductCard";
-import { Row, Col, Container, Alert } from "react-bootstrap";
+import { Row, Col, Container, Alert, Spinner } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../action/productAction";
@@ -10,32 +10,31 @@ const ProductAll = () => {
   const dispatch = useDispatch();
   const [query,setQuery] = useSearchParams();
   const error = useSelector((state) => state.product.error);
-
+  const isLoading = useSelector(state => state.product.loading);
   // 처음 로딩하면 상품리스트 불러오기
   const {productList} = useSelector((state) => state.product);
 
-  // useEffect(()=>{
-  //   dispatch(productActions.getProductList());
-  // },[])
-
   useEffect(()=>{
-    if(query){
-      const searchWord = query.get("name");
-      dispatch(productActions.getProductList({name:searchWord}));
-    }
-    dispatch(productActions.getProductList());
+    const searchWord = query? query.get("name") : null;
+    dispatch(productActions.getProductList({name:searchWord}));
   },[query])
 
   if(error) return <Alert>{error}</Alert>
 
   return (
     <Container>
+      {error && (
+          <div className="error-message">
+            <Alert variant="danger">{error}</Alert>
+          </div>
+        )}
+      {isLoading? <Spinner />:null}
       <Row>
         {productList.length>0? productList.map((product)=>(
           <Col md={3} sm={12}>
             <ProductCard product={product} key={product.sku}/>
           </Col>
-        )):<div className="text-center">{error}</div>}
+        )):<div className="text-center">다른 검색어를 입력해 주세요!ㅇ_0</div>}
       </Row>
     </Container>
   );

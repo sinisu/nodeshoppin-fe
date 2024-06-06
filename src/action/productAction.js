@@ -15,6 +15,7 @@ const getProductList = (query) => async (dispatch) => {
     console.log("response",response.data.data);
   }catch(error){
     dispatch({type:types.PRODUCT_GET_FAIL,payload:error.error});
+    console.log(error.error);
   };
 };
 

@@ -93,6 +93,19 @@ body{
 .card{
   border:none !important;
   margin-bottom: 10px;
+  width: 100%;
+  height: 95%;
+  overflow: hidden;
+}
+
+.image-size-box{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.image-size{
+  width: 100%;
 }
 
 .choice{
@@ -127,9 +140,10 @@ body{
   width: 100%;
 }
 
-.card:hover{
-  transform: scale(1.1);
+.image-size-box:hover{
+  transform: scale(1.25);
   z-index: 1;
+  transition: 0.5s;
 }
 .hide{
   visibility:hidden

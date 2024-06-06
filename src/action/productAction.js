@@ -6,10 +6,12 @@ import { commonUiActions } from "./commonUiAction";
 const getProductList = (query) => async (dispatch) => {
   try{
     dispatch({type:types.PRODUCT_GET_REQUEST})
-    const response = await api.get("/product");
+    const response = await api.get("/product",{
+      params:{...query}
+    });
     //status 200 이외에는 모두 에러로 잡히므로 아래 코드는 필요하지 않음
     if(response.status !== 200 ) throw new Error(response.error);
-    dispatch({type:types.PRODUCT_GET_SUCCESS,payload:response.data.data});
+    dispatch({type:types.PRODUCT_GET_SUCCESS,payload:response.data});
     console.log("response",response.data.data);
   }catch(error){
     dispatch({type:types.PRODUCT_GET_FAIL,payload:error.error});

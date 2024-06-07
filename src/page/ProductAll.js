@@ -13,9 +13,9 @@ const ProductAll = () => {
   const isLoading = useSelector(state => state.product.loading);
   // 처음 로딩하면 상품리스트 불러오기
   const {productList} = useSelector((state) => state.product);
+  const searchWord = query? query.get("name") : null;
 
   useEffect(()=>{
-    const searchWord = query? query.get("name") : null;
     dispatch(productActions.getProductList({name:searchWord}));
   },[query])
 
@@ -29,10 +29,11 @@ const ProductAll = () => {
       {isLoading? <Spinner />:null}
       <Row>
         {productList.length>0? productList.map((product)=>(
-          <Col md={3} sm={12}>
+          <Col md={3} sm={12} key={product.sku}>
             <ProductCard product={product} key={product.sku}/>
           </Col>
-        )):<div className="text-center">다른 검색어를 입력해 주세요!ㅇ_0</div>}
+        )):(<div className="text-center">{
+          searchWord ===''?'등록된 상품이 없습니다?!':'다른 검색어를 입력해 주세요!ㅇ_0'}</div>)}
       </Row>
     </Container>
   );

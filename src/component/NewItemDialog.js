@@ -19,8 +19,8 @@ const InitialFormData = {
   status: "active",
   price: "",
 };
-const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
-  const selectedProduct = useSelector((state) => state.product.selectedProduct);
+const NewItemDialog = ({ mode, showDialog, setShowDialog,searchQuery }) => {
+  const {selectedProduct} = useSelector((state) => state.product);
   const { error } = useSelector((state) => state.product);
   const [formData, setFormData] = useState(
     mode === "new" ? { ...InitialFormData } : selectedProduct
@@ -50,12 +50,14 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
     if (mode === "new") {
       //새 상품 만들기
-      dispatch(productActions.createProduct({...formData,stock:totalStock}));
+      dispatch(productActions.createProduct({...formData,stock:totalStock},searchQuery.page));
       setFormData(InitialFormData);
       setStock([]);
       setShowDialog(false);
     } else {
       // 상품 수정하기
+      dispatch(productActions.editProduct({...formData, stock:totalStock},selectedProduct._id,searchQuery.page));
+      setShowDialog(false);
     }
   };
 
@@ -119,8 +121,17 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     if (showDialog) {
       if (mode === "edit") {
         // 선택된 데이터값 불러오기 (재고 형태 객체에서 어레이로 바꾸기)
+        setFormData(selectedProduct);
+        // Object함수 !중요
+        const stockArray = Object.keys(selectedProduct.stock).map((size)=>[
+          size,
+          selectedProduct.stock[size],
+        ]);
+        setStock(stockArray);
       } else {
         // 초기화된 값 불러오기
+        setFormData({...InitialFormData});
+        setStock([]);
       }
     }
   }, [showDialog]);

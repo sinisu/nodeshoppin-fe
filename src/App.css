@@ -290,12 +290,11 @@ body{
   margin-right: 20px;
 }
 
-.paginate-style li{
-  background-color: rgb(245, 239, 233);
-  border: 1px solid rgb(245, 239, 233);
+.page-item{
+  background-color: whitesmoke;
+  border: 1px solid rgb(204, 204, 204);
   padding: 0.25rem 0.75rem;
-  margin: 0rem 0.25rem;
-  border-radius: 1rem;
+  margin: 0rem 0.1rem;
   font-weight: 600;
 }
 
@@ -303,7 +302,8 @@ body{
   border: 1px solid rgb(204, 204, 204);
 }
 
-.paginate-style li:active{
-  border: 1px solid rgb(204, 204, 204) !important;
-  background-color: gray;
+.paginate-style-active{
+  border: 1px solid rgb(107, 107, 107) !important;
+  background-color: rgb(107, 107, 107);
+  color: white;
 }

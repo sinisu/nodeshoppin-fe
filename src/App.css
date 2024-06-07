@@ -289,3 +289,21 @@ body{
   margin-top: 20px;
   margin-right: 20px;
 }
+
+.paginate-style li{
+  background-color: rgb(245, 239, 233);
+  border: 1px solid rgb(245, 239, 233);
+  padding: 0.25rem 0.75rem;
+  margin: 0rem 0.25rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.paginate-style li:hover{
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.paginate-style li:active{
+  border: 1px solid rgb(204, 204, 204) !important;
+  background-color: gray;
+}

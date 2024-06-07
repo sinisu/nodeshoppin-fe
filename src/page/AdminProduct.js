@@ -117,7 +117,7 @@ const AdminProduct = () => {
           breakLinkClassName="page-link"
           containerClassName="pagination"
           activeClassName="active"
-          className="display-center list-style-none"
+          className="display-center list-style-none paginate-style"
         />
       </Container>
 

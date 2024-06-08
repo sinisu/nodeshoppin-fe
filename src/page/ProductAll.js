@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../action/productAction";
 import { commonUiActions } from "../action/commonUiAction";
+import { cartActions } from "../action/cartAction";
 
 const ProductAll = () => {
   const dispatch = useDispatch();

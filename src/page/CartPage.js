@@ -10,7 +10,6 @@ import "../style/cart.style.css";
 const CartPage = () => {
   const dispatch = useDispatch();
   const {cartList,totalPrice} = useSelector((state)=>state.cart);
-  console.log(cartList);
 
   useEffect(() => {
     //카트리스트 불러오기

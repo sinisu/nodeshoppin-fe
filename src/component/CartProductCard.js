@@ -5,16 +5,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../action/cartAction";
 import { currencyFormat } from "../utils/number";
+import { useNavigate } from "react-router";
 
 const CartProductCard = ({ item }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleQtyChange = () => {
+  const handleQtyChange = (id,event) => {
     //아이템 수량을 수정한다
+    const qty = event.target.value;
+    dispatch(cartActions.updateQty(id,qty));
   };
 
   const deleteCart = (id) => {
     //아이템을 지운다
+    dispatch(cartActions.deleteCartItem(id));
   };
 
   return (
@@ -46,9 +51,9 @@ const CartProductCard = ({ item }) => {
           <div>
             Quantity:
             <Form.Select
-              onChange={(event) => handleQtyChange()}
+              onChange={(event) => handleQtyChange(item._id,event)}
               required
-              defaultValue={1}
+              defaultValue={item.qty}
               className="qty-dropdown"
             >
               <option value={1}>1</option>

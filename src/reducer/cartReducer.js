@@ -31,6 +31,7 @@ function cartReducer(state = initialState, action) {
       return {
         ...state,
         loading:false,
+        cartItemQty:payload.length,
         cartList:payload,
         totalPrice: payload.reduce(
           (total,item)=>total += item.productId.price*item.qty,

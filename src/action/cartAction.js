@@ -45,7 +45,8 @@ const updateQty = (id, qty) => async (dispatch) => {
     dispatch({type:types.UPDATE_CART_ITEM_REQUEST});
     const response = await api.put(`/cart/${id}`,{qty});
     if(response.status != 200) throw new Error(response.error);
-    dispatch({type:types.UPDATE_CART_ITEM_SUCCESS,payload:response.data.data})
+    dispatch({type:types.UPDATE_CART_ITEM_SUCCESS,payload:response.data.data.length});
+    console.log(response);
     dispatch(getCartList());
   }catch(error){
     dispatch({type:types.UPDATE_CART_ITEM_FAIL,error:error.error});

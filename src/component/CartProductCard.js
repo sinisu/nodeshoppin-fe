@@ -27,7 +27,7 @@ const CartProductCard = ({ item }) => {
     setModalShow(false);
   };
 
-  const option = Array.from({length:itemQty},(_, i) => i + 1);
+  // const option = Array.from({length:itemQty},(_, i) => i + 1);
 
   return (
     <div className="product-card-cart">
@@ -86,12 +86,12 @@ const CartProductCard = ({ item }) => {
                 defaultValue={item.qty}
                 className="qty-dropdown"
               >
-                {option.map((value)=>(
+                {/* {option.map((value)=>(
                   <option key={value} value={value}>
                     {value}
                   </option>
-                ))}
-                {/* <option value={1}>1</option>
+                ))} */}
+                <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
                 <option value={4}>4</option>
@@ -100,7 +100,7 @@ const CartProductCard = ({ item }) => {
                 <option value={7}>7</option>
                 <option value={8}>8</option>
                 <option value={9}>9</option>
-                <option value={10}>10</option> */}
+                <option value={10}>10</option>
               </Form.Select>
               {itemQty<=5?(
                 <div className="item-qty">*재고가 {itemQty}개 남았습니다!</div>

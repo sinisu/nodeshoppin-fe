@@ -42,3 +42,9 @@
     background-color: white;
     padding: 20px;
 }
+
+.item-qty{
+    margin-left: 0.5rem;
+    color: red;
+    font-size: small;
+}

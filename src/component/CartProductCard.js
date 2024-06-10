@@ -11,6 +11,9 @@ const CartProductCard = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [modalShow,setModalShow] = useState(false);
+  console.log("item",item)
+  const size = item.size;
+  const itemQty = item.productId.stock[size];
 
   const handleQtyChange = (id,event) => {
     //아이템 수량을 수정한다
@@ -23,6 +26,8 @@ const CartProductCard = ({ item }) => {
     dispatch(cartActions.deleteCartItem(id));
     setModalShow(false);
   };
+
+  const option = Array.from({length:itemQty},(_, i) => i + 1);
 
   return (
     <div className="product-card-cart">
@@ -74,23 +79,35 @@ const CartProductCard = ({ item }) => {
           <div>Total: ₩ {currencyFormat(item.productId.price*item.qty)}</div>
           <div>
             Quantity:
-            <Form.Select
-              onChange={(event) => handleQtyChange(item._id,event)}
-              required
-              defaultValue={item.qty}
-              className="qty-dropdown"
-            >
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-              <option value={6}>6</option>
-              <option value={7}>7</option>
-              <option value={8}>8</option>
-              <option value={9}>9</option>
-              <option value={10}>10</option>
-            </Form.Select>
+            <div className="d-flex">
+              <Form.Select
+                onChange={(event) => handleQtyChange(item._id,event)}
+                required
+                defaultValue={item.qty}
+                className="qty-dropdown"
+              >
+                {option.map((value)=>(
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+                {/* <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={6}>6</option>
+                <option value={7}>7</option>
+                <option value={8}>8</option>
+                <option value={9}>9</option>
+                <option value={10}>10</option> */}
+              </Form.Select>
+              {itemQty<=5?(
+                <div className="item-qty">*재고가 {itemQty}개 남았습니다!</div>
+              ):null}
+              
+            </div>
+            
           </div>
         </Col>
       </Row>

@@ -93,11 +93,11 @@ const ProductDetail = () => {
               {Object.keys(selectedProduct.stock).length > 0 &&
                   Object.keys(selectedProduct.stock).map((item) =>
                     selectedProduct.stock[item] > 0 ? (
-                      <Dropdown.Item eventKey={item}>
+                      <Dropdown.Item eventKey={item} key={item}>
                         {item.toUpperCase()}
                       </Dropdown.Item>
                     ) : (
-                      <Dropdown.Item eventKey={item} disabled={true}>
+                      <Dropdown.Item eventKey={item} disabled={true} key={item}>
                         {item.toUpperCase()}
                       </Dropdown.Item>
                     )

@@ -9,7 +9,7 @@ const initialState = {
   loading:false,
   error:null,
   cartItemQty:null,
-  cartList:null,
+  cartList:[],
   totalPrice:0,
 };
 

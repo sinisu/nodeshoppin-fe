@@ -37,6 +37,7 @@ const clearErrors = () => ({
 const logout = () => async (dispatch) => {
   dispatch({type:types.LOGOUT})
   sessionStorage.removeItem("token");
+  // dispatch(cartActions.getCartQty());
 };
 
 const loginWithGoogle = (token) => async (dispatch) => {};

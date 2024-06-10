@@ -41,6 +41,7 @@ const Navbar = ({ user, cartItemQty }) => {
   };
   const logout = () => {
     dispatch(userActions.logout());
+    navigate('/');
   };
 
   return (
@@ -105,7 +106,7 @@ const Navbar = ({ user, cartItemQty }) => {
               <FontAwesomeIcon icon={faShoppingBag} />
               {!isMobile && (
                 <span style={{ cursor: "pointer" }}>{`쇼핑백(${
-                  cartItemQty || 0
+                  user? cartItemQty : 0
                 })`}</span>
               )}
             </div>

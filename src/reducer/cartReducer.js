@@ -8,7 +8,7 @@ import {
 const initialState = {
   loading:false,
   error:null,
-  cartItemQty:null,
+  cartItemQty:0,
   cartList:[],
   totalPrice:0,
 };

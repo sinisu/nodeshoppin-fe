@@ -14,13 +14,14 @@ const CartPage = () => {
   useEffect(() => {
     //카트리스트 불러오기
     dispatch(cartActions.getCartList());
+    console.log(cartList)
   }, []);
 
   return (
     <Container>
       <Row>
         <Col xs={12} md={7}>
-          {cartList? cartList.map((item)=>(
+          {cartList.length>0? cartList.map((item)=>(
             <CartProductCard item={item} key={item._id}/>
             ))
             :(

@@ -3,6 +3,7 @@ import * as types from "../constants/user.constants";
 import { commonUiActions } from "./commonUiAction";
 import * as commonTypes from "../constants/commonUI.constants";
 import { cartActions } from "./cartAction";
+import { cat } from "@cloudinary/url-gen/qualifiers/focusOn";
 const loginWithToken = () => async (dispatch) => {
   try{
     dispatch({type:types.LOGIN_WITH_TOKEN_REQUEST})
@@ -40,7 +41,18 @@ const logout = () => async (dispatch) => {
   // dispatch(cartActions.getCartQty());
 };
 
-const loginWithGoogle = (token) => async (dispatch) => {};
+const loginWithGoogle = (token) => async (dispatch) => {
+  try{
+    dispatch({type:types.GOOGLE_LOGIN_REQUEST})
+    const response = await api.post('/auth/google',{token})
+    if(response.status !== 200) throw new Error(response.error)
+    sessionStorage.setItem("token",response.data.token);
+    dispatch({type:types.GOOGLE_LOGIN_SUCCESS,payload:response.data});
+  }catch(error){
+    dispatch({type:types.GOOGLE_LOGIN_FAIL,payload:error.error})
+    dispatch(commonUiActions.showToastMessage(error.error,"error"))
+  }
+};
 
 const registerUser =
   ({ email, name, password },navigate) =>

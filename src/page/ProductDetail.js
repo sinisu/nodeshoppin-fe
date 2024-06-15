@@ -93,8 +93,9 @@ const ProductDetail = () => {
               {Object.keys(selectedProduct.stock).length > 0 &&
                   Object.keys(selectedProduct.stock).map((item) =>
                     selectedProduct.stock[item] > 0 ? (
-                      <Dropdown.Item eventKey={item} key={item}>
-                        {item.toUpperCase()}
+                      <Dropdown.Item eventKey={item} key={item} className="stock-text">
+                        <div>{item.toUpperCase()}</div>
+                        {selectedProduct.stock[item]<=5?<div className="font-red">남은 수량:{selectedProduct.stock[item]}</div>:''}
                       </Dropdown.Item>
                     ) : (
                       <Dropdown.Item eventKey={item} disabled={true} key={item}>

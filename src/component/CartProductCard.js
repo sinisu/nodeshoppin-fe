@@ -102,9 +102,9 @@ const CartProductCard = ({ item }) => {
                 <option value={9}>9</option>
                 <option value={10}>10</option>
               </Form.Select>
-              {/* {itemQty<=5?(
+              {itemQty<=5?(
                 <div className="item-qty">*재고가 {itemQty}개 남았습니다!</div>
-              ):null} */}
+              ):null}
               
             </div>
             

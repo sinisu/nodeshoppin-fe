@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ProductCard from "../component/ProductCard";
 import { Row, Col, Container, Alert, Spinner } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../action/productAction";
 import { commonUiActions } from "../action/commonUiAction";
@@ -15,9 +15,11 @@ const ProductAll = () => {
   // 처음 로딩하면 상품리스트 불러오기
   const {productList} = useSelector((state) => state.product);
   const searchWord = query? query.get("name") : null;
+  let category = query? query.get("category") : null;
+  if(category==="all") {category = null;}
 
   useEffect(()=>{
-    dispatch(productActions.getProductList({name:searchWord}));
+    dispatch(productActions.getProductList({name:searchWord,category:category}));
   },[query])
 
   return (

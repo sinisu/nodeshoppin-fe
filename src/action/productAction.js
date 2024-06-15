@@ -6,6 +6,7 @@ import { commonUiActions } from "./commonUiAction";
 const getProductList = (query) => async (dispatch) => {
   try{
     dispatch({type:types.PRODUCT_GET_REQUEST})
+    console.log(query)
     const response = await api.get("/product",{
       params:{...query}
     });

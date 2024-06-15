@@ -19,14 +19,11 @@ const Navbar = ({ user, cartItemQty }) => {
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
   const menuList = [
-    "여성",
-    "Divided",
-    "남성",
-    "신생아/유아",
-    "아동",
-    "H&M HOME",
-    "Sale",
-    "지속가능성",
+    "All",
+    "TOP",
+    "PANTS",
+    "SKIRTS",
+    "DRESS",
   ];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
@@ -43,6 +40,10 @@ const Navbar = ({ user, cartItemQty }) => {
     dispatch(userActions.logout());
     navigate('/');
   };
+
+  const changeQuery = (category) =>{
+    navigate(`/?category=${category}`)
+  }
 
   return (
     <div>
@@ -135,7 +136,12 @@ const Navbar = ({ user, cartItemQty }) => {
         <ul className="menu">
           {menuList.map((menu, index) => (
             <li key={index}>
-              <a href="#">{menu}</a>
+              <button 
+                className="btn-style-none"
+                onClick={()=>changeQuery(menu.toLowerCase())}
+              >
+                {menu}
+              </button>
             </li>
           ))}
         </ul>

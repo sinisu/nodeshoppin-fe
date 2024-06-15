@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -9,9 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userActions } from "../action/userAction";
-import { cartActions } from "../action/cartAction";
 
 const Navbar = ({ user, cartItemQty }) => {
   const dispatch = useDispatch();
@@ -42,7 +41,11 @@ const Navbar = ({ user, cartItemQty }) => {
   };
 
   const changeQuery = (category) =>{
-    navigate(`/?category=${category}`)
+    if(category==="all"){
+      navigate('/')
+    }else{
+      navigate(`/?category=${category}`)
+    }
   }
 
   return (
